@@ -6,19 +6,21 @@ import com.capaTest.entities.Team;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
+import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
 
-@Mapper(componentModel = "cdi")
+@Mapper(componentModel = "cdi",unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface TeamMapper {
     String diagramName = "diagram.jpeg";
     @Mappings({
             @Mapping(source = "teamName", target = "teamName"),
-            @Mapping(source = "projects", target = "projects"),
+            @Mapping(source = "projects", target = "projectsDtos"),
             @Mapping(expression = "java(diagramName)", target = "diagram"),
     })
-    TeamDto teamDtoToTeam(Team team);
-    Team teamToTeamDto(TeamDto teamDto);
+
+    TeamDto teamToTeamDto(Team team);
+    Team teamDtoToTeam(TeamDto teamDto);
     List<TeamDto> teamsToTeamsDto(List<Team> teams);
 
 }

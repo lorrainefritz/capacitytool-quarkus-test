@@ -1,5 +1,6 @@
 package com.capaTest.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,11 +12,10 @@ import java.util.List;
 
 @Entity
 @NoArgsConstructor
-
 public class Project extends PanacheEntity {
 
-
     public String projectName;
+    public String link;
     public int avlPods;
     public boolean limits;
     public boolean quotas;
@@ -35,8 +35,16 @@ public class Project extends PanacheEntity {
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     public List<Pod> pods;
 
-    public Project(String projectName, int avlPods, boolean limits, boolean quotas, boolean rollingUpdate, String curCpu, int curCpuPercentage, String reqCpu, int reqCpuPercentage, String cpuReqLim, int percentageReqLim, String curMem, int percentageCurMem, String reqMem, int percentageReqMem, String limMem, int percentageLimMem, List<Pod> pods) {
+    @ManyToOne
+    @JsonIgnore
+    public Team team;
+    @ManyToOne
+    @JsonIgnore
+    Environment environment;
+
+    public Project(String projectName, String link, int avlPods, boolean limits, boolean quotas, boolean rollingUpdate, String curCpu, int curCpuPercentage, String reqCpu, int reqCpuPercentage, String cpuReqLim, int percentageReqLim, String curMem, int percentageCurMem, String reqMem, int percentageReqMem, String limMem, int percentageLimMem, List<Pod> pods, Team team, Environment environment) {
         this.projectName = projectName;
+        this.link = link;
         this.avlPods = avlPods;
         this.limits = limits;
         this.quotas = quotas;
@@ -54,5 +62,7 @@ public class Project extends PanacheEntity {
         this.limMem = limMem;
         this.percentageLimMem = percentageLimMem;
         this.pods = pods;
+        this.team = team;
+        this.environment = environment;
     }
 }

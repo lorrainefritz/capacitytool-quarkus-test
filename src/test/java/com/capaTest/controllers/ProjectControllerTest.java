@@ -16,8 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.is;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @QuarkusTest
@@ -35,7 +34,7 @@ class ProjectControllerTest {
     @BeforeEach
     void setUp() {
         projectDto = new ProjectDto("foo", 0, false, false, false, "0/null", 1, "200/null", 1, "500/null", 1, "356/null", 1, "250/null", 1, "750/null", 1, null);
-        project = new Project("bar", 0, false, false, false, "0/null", 1, "200/null", 1, "500/null", 1, "356/null", 1, "250/null", 1, "750/null", 1, null);
+        project = new Project("bar","http://project.com", 0, false, false, false, "0/null", 1, "200/null", 1, "500/null", 1, "356/null", 1, "250/null", 1, "750/null", 1, null,null,null);
 
     }
 

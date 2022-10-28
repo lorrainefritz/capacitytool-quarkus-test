@@ -13,8 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 public class ProjectDto {
-
-  private String projectName;
+    private String projectName;
     private int avlPods;
     private boolean limits;
     private boolean quotas;
@@ -31,5 +30,5 @@ public class ProjectDto {
     private int percentageReqMem;
     private String limMem;
     private int percentageLimMem;
-    private List<PodDto> podDtos;
+    private List<Pod> pods;
 }

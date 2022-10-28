@@ -5,10 +5,11 @@ import com.capaTest.entities.Project;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
+import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
 
-@Mapper(componentModel = "cdi")
+@Mapper(componentModel = "cdi",unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ProjectMapper {
 
     @Mappings({
@@ -28,7 +29,10 @@ public interface ProjectMapper {
             @Mapping(source = "reqMem", target = "reqMem"),
             @Mapping(source = "percentageReqMem", target = "percentageReqMem"),
             @Mapping(source = "limMem", target = "limMem"),
-            @Mapping(source = "percentageLimMem", target = "percentageLimMem")
+            @Mapping(source = "percentageLimMem", target = "percentageLimMem"),
+            @Mapping(source = "pods", target = "pods")
+            //unmapping of Teams
+
     })
     ProjectDto projectToProjectDto(Project project);
     Project projectDtoToProject(ProjectDto projectDto);
